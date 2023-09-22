@@ -10,42 +10,46 @@
     <div class="card">
       <h1>Find's Destination Date</h1>
       <form action="" class="fields">
-        <div class="from">
-          <!-- <img src="/img/icons8-location-30.png" alt="" class="s-icon" /> -->
-          <label for="start">From</label>
-          <!-- <input type="text" name="" id="start" class="start" /> -->
-          <input list="start-list" id="start" class="start" />
-          <datalist id="start-list">
-            <!-- <option value="Select Location">Select Loction</option> -->
-            <option value="Tirunelveli">Tirunelveli</option>
-            <option value="Madurai">Madurai</option>
-            <option value="Trichy">Trichy</option>
-            <option value="Coimbatore">Coimbatore</option>
-            <option value="Salem">Salem</option>
-            <option value="Chennai">Chennai</option>
-            <option value="Bangalore">Bangalore</option>
-            <option value="Mumbai">Mumbai</option>
-          </datalist>
+        <div class="input">
+          <div class="from">
+            <!-- <img src="/img/icons8-location-30.png" alt="" class="s-icon" /> -->
+            <label for="start">From</label>
+            <!-- <input type="text" name="" id="start" class="start" /> -->
+            <input list="start-list" id="start" class="start" />
+            <datalist id="start-list">
+              <!-- <option value="Select Location">Select Loction</option> -->
+              <option value="Tirunelveli">Tirunelveli</option>
+              <option value="Madurai">Madurai</option>
+              <option value="Trichy">Trichy</option>
+              <option value="Coimbatore">Coimbatore</option>
+              <option value="Salem">Salem</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Mumbai">Mumbai</option>
+            </datalist>
+          </div>
+          <div class="to">
+            <!-- <img src="/img/icons8-location-30.png" alt="" class="e-icon" /> -->
+            <label for="end">To</label>
+            <!-- <input type="text" name="" id="end" class="end" /> -->
+            <input list="end-list" id="end" class="end" />
+            <datalist id="end-list">
+              <!-- <option value="">Select Loction</option> -->
+              <option value="Tirunelveli">Tirunelveli</option>
+              <option value="Madurai">Madurai</option>
+              <option value="Trichy">Trichy</option>
+              <option value="Coimbatore">Coimbatore</option>
+              <option value="Salem">Salem</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Mumbai">Mumbai</option>
+            </datalist>
+          </div>
+          <div class="date-box">
+            <label for="date">Date</label>
+            <input type="date" name="" id="date" class="date" />
+          </div>
         </div>
-        <div class="to">
-          <!-- <img src="/img/icons8-location-30.png" alt="" class="e-icon" /> -->
-          <label for="end">To</label>
-          <!-- <input type="text" name="" id="end" class="end" /> -->
-          <input list="end-list" id="end" class="end" />
-          <datalist id="end-list">
-            <!-- <option value="">Select Loction</option> -->
-            <option value="Tirunelveli">Tirunelveli</option>
-            <option value="Madurai">Madurai</option>
-            <option value="Trichy">Trichy</option>
-            <option value="Coimbatore">Coimbatore</option>
-            <option value="Salem">Salem</option>
-            <option value="Chennai">Chennai</option>
-            <option value="Bangalore">Bangalore</option>
-            <option value="Mumbai">Mumbai</option>
-          </datalist>
-        </div>
-        <label for="date">Date</label>
-        <input type="date" name="" id="date" class="date" />
         <div class="btn-box">
           <button type="button" class="btn-1 btn" onclick="init()">
             Submit

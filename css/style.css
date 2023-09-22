@@ -64,10 +64,19 @@ input,
 .e-icon {
   top: 9.5rem;
 } */
+.input,
+.btn-box {
+  display: flex;
+}
+
 .from,
 .to {
   display: flex;
   flex-direction: column;
+  margin-right: 1rem;
+}
+.btn-box {
+  justify-content: center;
 }
 
 .btn {

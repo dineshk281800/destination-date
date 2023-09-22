@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Destination Date</title>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Find's Destination Date</h1>
+      <form action="" class="fields">
+        <div class="from">
+          <!-- <img src="/img/icons8-location-30.png" alt="" class="s-icon" /> -->
+          <label for="start">From</label>
+          <!-- <input type="text" name="" id="start" class="start" /> -->
+          <input list="start-list" id="start" class="start" />
+          <datalist id="start-list">
+            <!-- <option value="Select Location">Select Loction</option> -->
+            <option value="Tirunelveli">Tirunelveli</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Trichy">Trichy</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Salem">Salem</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Mumbai">Mumbai</option>
+          </datalist>
+        </div>
+        <div class="to">
+          <!-- <img src="/img/icons8-location-30.png" alt="" class="e-icon" /> -->
+          <label for="end">To</label>
+          <!-- <input type="text" name="" id="end" class="end" /> -->
+          <input list="end-list" id="end" class="end" />
+          <datalist id="end-list">
+            <!-- <option value="">Select Loction</option> -->
+            <option value="Tirunelveli">Tirunelveli</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Trichy">Trichy</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Salem">Salem</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Mumbai">Mumbai</option>
+          </datalist>
+        </div>
+        <label for="date">Date</label>
+        <input type="date" name="" id="date" class="date" />
+        <div class="btn-box">
+          <button type="button" class="btn-1 btn" onclick="init()">
+            Submit
+          </button>
+          <button type="reset" class="btn-2 btn">Reset</button>
+        </div>
+      </form>
+      <div class="display">
+        <div class="result"></div>
+        <div class="error-msg"></div>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

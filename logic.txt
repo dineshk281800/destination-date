@@ -1,0 +1,112 @@
+const route = [
+  ["tirunelveli", "madurai", "salem", "bangalore", "mumbai"],
+  ["mumbai", "bangalore", "salem", "madurai", "tirunelveli"],
+  ["tirunelveli", "madurai", "trichy", "chennai"],
+  ["chennai", "trichy", "madurai", "tirunelveli"],
+  ["tirunelveli", "madurai", "coimbatore"],
+  ["coimbatore", "madurai", "tirunelveli"],
+  ["chennai", "bangalore", "mumbai"],
+  ["mumbai", "bangalore", "chennai"],
+  ["coimbatore", "chennai"],
+  ["chennai", "coimbatore"],
+  ["coimbatore", "bangalore"],
+  ["bangalore", "coimbatore"],
+];
+
+const pairing = [
+  {
+    "tirunelveli-madurai": 2,
+    "madurai-salem": 3,
+    "salem-bangalore": 2,
+    "bangalore-mumbai": 3,
+    "madurai-trichy": 2,
+    "trichy-chennai": 3,
+    "madurai-coimbatore": 3,
+    "chennai-bangalore": 2,
+    "coimbatore-chennai": 3,
+    "coimbatore-bangalore": 3,
+  },
+  {
+    "madurai-tirunelveli": 2,
+    "salem-madurai": 3,
+    "bangalore-salem": 2,
+    "mumbai-bangalore": 3,
+    "trichy-madurai": 2,
+    "chennai-trichy": 3,
+    "coimbatore-madurai": 3,
+    "bangalore-chennai": 2,
+    "chennai-coimbatore": 3,
+    "bangalore-coimbatore": 3,
+  },
+];
+
+// const starting = document.querySelector(".start").value;
+// const ending = document.querySelector(".end").value;
+const starting = "tirunelveli";
+const ending = "bangalore";
+
+const countdays = (s) => {
+  const dayList = [];
+  for (let i = 0; i < s.length - 1; i++) {
+    for (let j = 0; j < pairing.length; j++) {
+      for (let loc in pairing[j]) {
+        let original = `${s[i]}-${s[i + 1]}`;
+        // console.log(original);
+        // console.log(loc);
+        if (original === loc) {
+          // console.log(original);
+          // console.log(loc);
+          dayList.push(pairing[j][loc]);
+        }
+      }
+    }
+  }
+  return dayList;
+};
+// console.log(days);
+for (let i = 0; i < route.length; i++) {
+  const from = route[i].indexOf(starting);
+  const to = route[i].indexOf(ending);
+  const s = route[i].slice(from, to + 1);
+  let days = 0;
+  let counts;
+  // s[from] === starting && s[to] === ending ? console.log(s) : "route not found";
+  if (s[from] === starting && s[to] === ending) {
+    console.log(s);
+    // console.log(countdays(s));
+    counts = countdays(s);
+    for (let x of counts) {
+      days += x;
+    }
+    console.log(days);
+    break;
+  }
+  // console.log(from, to);
+  // console.log(s);
+  // console.log(list);
+}
+
+
+<!---find the route using forEach method -->
+// route.forEach((routes, index) => {
+//   const from = routes.indexOf(starting);
+//   const to = routes.indexOf(ending);
+//   const s = routes.slice(from, to + 1);
+//   let days = 0;
+//   let counts;
+//   // s[from] === starting && s[to] === ending ? console.log(s) : "route not found";
+//   if (s[from] === starting && s[to] === ending) {
+//     console.log(s);
+//     // console.log(countdays(s));
+//     counts = countdays(s);
+//     for (let x of counts) {
+//       days += x;
+//     }
+//     console.log(days);
+
+//     return;
+//   }
+//   // console.log(from, to);
+//   // console.log(s);
+//   // console.log(list);
+// });

@@ -112,8 +112,11 @@ input:focus {
   font-size: 2rem;
 }
 .display {
-  border: none;
+  border: 1px solid #000;
+  border-radius: 1rem;
   padding: 1rem;
+  width: 100%;
+  text-align: center;
 }
 .error-msg {
   position: relative;

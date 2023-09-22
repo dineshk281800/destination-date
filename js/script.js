@@ -81,16 +81,28 @@ const countdays = (s) => {
   return dayList;
 };
 
+const power = (num) => {
+  return num > 0
+    ? ["th", "st", "nd", "rd"][
+        (num > 3 && num < 21) || num % 10 > 3 ? 0 : num % 10
+      ]
+    : "";
+};
+
 // -------start date -> arrival date--------
 const holiday = (dateInput, days) => {
   let date = new Date(dateInput);
-  const startDa = `${date.getDate()} ${months[date.getMonth()]} Start`;
+  const startDa = `${date.getDate()}<sup>${power(date.getDate())}</sup> ${
+    months[date.getMonth()]
+  } Start`;
   let arrivalDa;
   // console.log(startDa);
   while (days > 0) {
     if (date.getDay() !== 6) {
       if (date.getDay() !== 0) {
-        arrivalDa = `Arrive on ${date.getDate()} ${months[date.getMonth()]}`;
+        arrivalDa = `Arrive on ${date.getDate()}<sup>${power(
+          date.getDate()
+        )}</sup> ${months[date.getMonth()]}`;
         days--;
       }
     }
@@ -105,11 +117,16 @@ const init = () => {
   const ending = document.querySelector(".end").value.toLowerCase();
   const dateInput = document.querySelector(".date").value;
   let find = false;
-  // displayView.style.border = none;
+  // displayView.style.border = "none";
   resultView.innerHTML = "";
   errorMsg.innerHTML = "";
   let r = "";
 
+  if (dateInput === "") {
+    errorMsg.innerHTML = "Please Enter the Date...";
+    resultView.innerHTML = "";
+    return;
+  }
   for (let i = 0; i < route.length; i++) {
     const from = route[i].indexOf(starting);
     const to = route[i].indexOf(ending);
@@ -122,7 +139,7 @@ const init = () => {
       break;
     }
     if (s[0] === starting && s[s.length - 1] === ending) {
-      // displayView.style.border = "1px solid #000";
+      displayView.style.border = "1px solid #000";
       s.forEach((item) => (r += `${item}->`));
       const pathWay = r.slice(0, r.length - 2);
       // console.log(pathWay);
@@ -143,11 +160,12 @@ const init = () => {
   }
   if (!find) {
     errorMsg.innerHTML = "Route not found";
+    // displayView.style.border = "1px solid #000";
   }
 };
 
 resetBtn.addEventListener("click", () => {
   errorMsg.innerHTML = "";
   resultView.innerHTML = "";
-  // displayView.style.border = none;
+  // displayView.style.border = "none";
 });

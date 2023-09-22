@@ -110,3 +110,32 @@ for (let i = 0; i < route.length; i++) {
 //   // console.log(s);
 //   // console.log(list);
 // });
+
+// // -----calculate holidays(saturday,sunday)-----
+// const holiday = (dateInput, days) => {
+//   let da = new Date(dateInput);
+//   let rough = da.getDate();
+//   for (let i = 0; i < days; i++) {
+//     da.setDate(rough);
+//     // rough = da.getDate() + 1;
+//     console.log(da);
+//     rough = da.getDate() + 1;
+//     console.log("days:", da.getDay());
+//     if (da.getDay() === 6 || da.getDay() === 0) {
+//       count++;
+//     }
+//     console.log("count:", count);
+//   }
+//   return count;
+// };
+
+// // ------arrival date------
+// const arrivalDay = (dateInput, days) => {
+//   const da = new Date(dateInput);
+//   const startDa = `${da.getDate()} ${months[da.getMonth()]} Start`;
+//   console.log(startDa);
+//   da.setDate(da.getDate() + days);
+//   const arrivalDa = `Arrive on ${da.getDate()} ${months[da.getMonth()]}`;
+//   console.log(arrivalDa);
+//   return [startDa, arrivalDa];
+// };

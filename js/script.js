@@ -1,3 +1,4 @@
+// -------data's---------
 const route = [
   ["tirunelveli", "madurai", "salem", "bangalore", "mumbai"],
   ["mumbai", "bangalore", "salem", "madurai", "tirunelveli"],
@@ -13,7 +14,6 @@ const route = [
   ["bangalore", "coimbatore"],
 ];
 
-// const days = [[2, 3, 2, 3]];
 const pairing = [
   {
     "tirunelveli-madurai": 2,
@@ -55,15 +55,16 @@ const months = [
   "Nov",
   "Dec",
 ];
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+// ------variable initializtion------
 const displayView = document.querySelector(".display");
 const resultView = document.querySelector(".result");
 const errorMsg = document.querySelector(".error-msg");
 const resetBtn = document.querySelector(".btn-2");
 let markUp;
-let count = 0;
+// let count = 0;
 
+//-------collect no of days ------
 const countdays = (s) => {
   const dayList = [];
   for (let i = 0; i < s.length - 1; i++) {
@@ -72,6 +73,7 @@ const countdays = (s) => {
         let original = `${s[i]}-${s[i + 1]}`;
         if (original === loc) {
           dayList.push(pairing[j][loc]);
+          // console.log(pairing[j][loc]);
         }
       }
     });
@@ -79,29 +81,22 @@ const countdays = (s) => {
   return dayList;
 };
 
+// -------start date -> arrival date--------
 const holiday = (dateInput, days) => {
-  let da = new Date(dateInput);
-  let rough = da.getDate();
-  for (let i = 0; i < days; i++) {
-    da.setDate(rough);
-    // rough = da.getDate() + 1;
-    console.log(da);
-    rough = da.getDate() + 1;
-    if (da.getDay() === 6) {
-      count += 1;
+  let date = new Date(dateInput);
+  const startDa = `${date.getDate()} ${months[date.getMonth()]} Start`;
+  let arrivalDa;
+  // console.log(startDa);
+  while (days > 0) {
+    if (date.getDay() !== 6) {
+      if (date.getDay() !== 0) {
+        arrivalDa = `Arrive on ${date.getDate()} ${months[date.getMonth()]}`;
+        days--;
+      }
     }
-    console.log(count);
+    date.setDate(date.getDate() + 1);
   }
-  return count;
-};
-
-const arrivalDay = (dateInput, days) => {
-  const da = new Date(dateInput);
-  const startDa = `${da.getDate()} ${months[da.getMonth()]} Start`;
-  console.log(startDa);
-  da.setDate(da.getDate() + days);
-  const arrivalDa = `Arrive on ${da.getDate()} ${months[da.getMonth()]}`;
-  console.log(arrivalDa);
+  // console.log(arrivalDa);
   return [startDa, arrivalDa];
 };
 
@@ -114,15 +109,12 @@ const init = () => {
   resultView.innerHTML = "";
   errorMsg.innerHTML = "";
   let r = "";
-  let d = "";
-  console.log(dateInput);
+
   for (let i = 0; i < route.length; i++) {
     const from = route[i].indexOf(starting);
     const to = route[i].indexOf(ending);
-    // console.log(from, to);
     const s = route[i].slice(from, to + 1);
-    // console.log(s);
-    // console.log(s[0], s[s.length - 1]);
+
     let days = 0;
     let counts;
     if (starting === ending) {
@@ -131,26 +123,16 @@ const init = () => {
     }
     if (s[0] === starting && s[s.length - 1] === ending) {
       // displayView.style.border = "1px solid #000";
-      console.log(s);
       s.forEach((item) => (r += `${item}->`));
-      // for (let i = 0; i < s.length; i++) {
-      //   r = r + `${s[i]}->`;
-      // }
-      console.log(r.slice(0, r.length - 2));
       const pathWay = r.slice(0, r.length - 2);
+      // console.log(pathWay);
       counts = countdays(s);
       for (let x of counts) {
         days += x;
-        // d = d + `${x}+`;
       }
-      // d = d.slice(0, d.length - 1);
-      // console.log(`${d}=${days}`);
-      // console.log(days);
-      // days = days >= 7 ? days + 2 * Math.floor(days / 7) : days;
-      const holidayWith = holiday(dateInput, days - 1) + days;
-      console.log(holidayWith);
-      console.log(`number of days: ${days}`);
-      const [startDate, arrivalDate] = arrivalDay(dateInput, holidayWith);
+
+      // console.log(`number of days: ${days}`);
+      const [startDate, arrivalDate] = holiday(dateInput, days);
       markUp = `<p class="route para">Route: <br> ${pathWay}</p>
       <p class="no_days para">Number of days:${days}</p>
       <p class="arrival_date para">${startDate} -> ${arrivalDate}</p>`;
@@ -169,113 +151,3 @@ resetBtn.addEventListener("click", () => {
   resultView.innerHTML = "";
   // displayView.style.border = none;
 });
-
-// const m = 6;
-// console.log(m > 5 ? m + 2 * Math.floor(m / 5) : m);
-// const d = new Date();
-// console.log(d);
-// d.setDate(d.getDate() + 5);
-// console.log(d);
-// const init = () => {
-//   // const starting = document.querySelector(".start").value;
-//   // console.log(starting);
-//   console.log("hi");
-// };
-
-// const data = [
-//   {
-//     route: 1,
-//     start: "tirunelveli",
-//     end: "madurai",
-//     days: 2,
-//   },
-
-//   {
-//     route: 2,
-//     start: "madurai",
-//     end: "tirunelveli",
-//     days: 2,
-//   },
-//   {
-//     route: 3,
-//     start: "madurai",
-//     end: "trichy",
-//     days: 2,
-//   },
-//   {
-//     route: 4,
-//     start: "trichy",
-//     end: "chennai",
-//     days: 3,
-//   },
-//   {
-//     route: 5,
-//     start: "madurai",
-//     end: "coimbatore",
-//     days: 3,
-//   },
-//   {
-//     route: 6,
-//     start: "coimbatore",
-//     end: "chennai",
-//     days: 3,
-//   },
-//   {
-//     route: 7,
-//     start: "madurai",
-//     end: "salem",
-//     days: 3,
-//   },
-//   {
-//     route: 8,
-//     start: "salem",
-//     end: "bangalore",
-//     days: 2,
-//   },
-//   {
-//     route: 9,
-//     start: "chennai",
-//     end: "bangalore",
-//     days: 2,
-//   },
-//   {
-//     route: 10,
-//     start: "bangalore",
-//     end: "mumbai",
-//     days: 3,
-//   },
-//   {
-//     route: 11,
-//     start: "chennai",
-//     end: "mumbai",
-//     days: 5,
-//   },
-//   {
-//     route: 12,
-//     start: "coimbatore",
-//     end: "bangalore",
-//     days: 3,
-//   },
-// ];
-
-// const starting = document.querySelector(".start").value;
-// const ending = document.querySelector(".end").value;
-// const starting = "tirunelveli";
-// const ending = "bangalore";
-
-// let arr = [];
-// let from;
-// data.forEach((item, index) => {
-//   if (item.start === starting && item.end === ending) {
-//     arr.push(item.start);
-//     arr.push(item.end);
-//     return;
-//   } else if (item.start === starting) {
-//     arr.push(item.start);
-//     // arr.push(item.end);
-//     from = item.end;
-//   } else if (item.start === from) {
-//     arr.push(item.start);
-//     data.slice;
-//   }
-// });

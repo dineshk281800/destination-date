@@ -62,7 +62,6 @@ const resultView = document.querySelector(".result");
 const errorMsg = document.querySelector(".error-msg");
 const resetBtn = document.querySelector(".btn-2");
 let markUp;
-// let count = 0;
 
 //-------collect no of days ------
 const countdays = (s) => {
@@ -73,7 +72,6 @@ const countdays = (s) => {
         let original = `${s[i]}-${s[i + 1]}`;
         if (original === loc) {
           dayList.push(pairing[j][loc]);
-          // console.log(pairing[j][loc]);
         }
       }
     });
@@ -92,11 +90,10 @@ const power = (num) => {
 // -------start date -> arrival date--------
 const holiday = (dateInput, days) => {
   let date = new Date(dateInput);
-  const startDa = `${date.getDate()}<sup>${power(date.getDate())}</sup> ${
+  let startDa = `${date.getDate()}<sup>${power(date.getDate())}</sup> ${
     months[date.getMonth()]
   } Start`;
   let arrivalDa;
-  // console.log(startDa);
   while (days > 0) {
     if (date.getDay() !== 6) {
       if (date.getDay() !== 0) {
@@ -108,7 +105,6 @@ const holiday = (dateInput, days) => {
     }
     date.setDate(date.getDate() + 1);
   }
-  // console.log(arrivalDa);
   return [startDa, arrivalDa];
 };
 
@@ -117,7 +113,6 @@ const init = () => {
   const ending = document.querySelector(".end").value.toLowerCase();
   const dateInput = document.querySelector(".date").value;
   let find = false;
-  // displayView.style.border = "none";
   resultView.innerHTML = "";
   errorMsg.innerHTML = "";
   let r = "";
@@ -142,13 +137,11 @@ const init = () => {
       displayView.style.border = "1px solid #000";
       s.forEach((item) => (r += `${item}->`));
       const pathWay = r.slice(0, r.length - 2);
-      // console.log(pathWay);
       counts = countdays(s);
       for (let x of counts) {
         days += x;
       }
 
-      // console.log(`number of days: ${days}`);
       const [startDate, arrivalDate] = holiday(dateInput, days);
       markUp = `<p class="route para">Route: <br> ${pathWay}</p>
       <p class="no_days para">Number of days:${days}</p>
@@ -160,12 +153,10 @@ const init = () => {
   }
   if (!find) {
     errorMsg.innerHTML = "Route not found";
-    // displayView.style.border = "1px solid #000";
   }
 };
 
 resetBtn.addEventListener("click", () => {
   errorMsg.innerHTML = "";
   resultView.innerHTML = "";
-  // displayView.style.border = "none";
 });

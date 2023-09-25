@@ -108,7 +108,7 @@ const init = () => {
     return;
   }
   if (starting === "" || ending === "") {
-    errorMsg.innerHTML = "Please Enter the route...";
+    errorMsg.innerHTML = "Please Select the route...";
     resultView.innerHTML = "";
     return;
   }

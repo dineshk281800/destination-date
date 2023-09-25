@@ -1,3 +1,4 @@
+// -------data's---------
 const route = [
   ["tirunelveli", "madurai", "salem", "bangalore", "mumbai"],
   ["mumbai", "bangalore", "salem", "madurai", "tirunelveli"],
@@ -40,102 +41,123 @@ const pairing = [
   },
 ];
 
-// const starting = document.querySelector(".start").value;
-// const ending = document.querySelector(".end").value;
-const starting = "tirunelveli";
-const ending = "bangalore";
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
+// ------variable initializtion------
+const displayView = document.querySelector(".display");
+const resultView = document.querySelector(".result");
+const errorMsg = document.querySelector(".error-msg");
+const resetBtn = document.querySelector(".btn-2");
+let markUp;
+
+// -------collect no of days ------
 const countdays = (s) => {
   const dayList = [];
   for (let i = 0; i < s.length - 1; i++) {
-    for (let j = 0; j < pairing.length; j++) {
+    pairing.forEach((_, j) => {
       for (let loc in pairing[j]) {
         let original = `${s[i]}-${s[i + 1]}`;
-        // console.log(original);
-        // console.log(loc);
         if (original === loc) {
-          // console.log(original);
-          // console.log(loc);
           dayList.push(pairing[j][loc]);
         }
       }
-    }
+    });
   }
   return dayList;
 };
-// console.log(days);
-for (let i = 0; i < route.length; i++) {
-  const from = route[i].indexOf(starting);
-  const to = route[i].indexOf(ending);
-  const s = route[i].slice(from, to + 1);
-  let days = 0;
-  let counts;
-  // s[from] === starting && s[to] === ending ? console.log(s) : "route not found";
-  if (s[from] === starting && s[to] === ending) {
-    console.log(s);
-    // console.log(countdays(s));
-    counts = countdays(s);
-    for (let x of counts) {
-      days += x;
+
+const power = (num) => {
+  return num > 0
+    ? ["th", "st", "nd", "rd"][
+        (num > 3 && num < 21) || num % 10 > 3 ? 0 : num % 10
+      ]
+    : "";
+};
+
+// -------start date -> arrival date--------
+const holiday = (dateInput, days) => {
+  let date = new Date(dateInput);
+  let startDa = `${date.getDate()}<sup>${power(date.getDate())}</sup> ${
+    months[date.getMonth()]
+  } Start`;
+  let arrivalDa;
+  while (days > 0) {
+    if (date.getDay() !== 6) {
+      if (date.getDay() !== 0) {
+        arrivalDa = `Arrive on ${date.getDate()}<sup>${power(
+          date.getDate()
+        )}</sup> ${months[date.getMonth()]}`;
+        days--;
+      }
     }
-    console.log(days);
-    break;
+    date.setDate(date.getDate() + 1);
   }
-  // console.log(from, to);
-  // console.log(s);
-  // console.log(list);
-}
+  return [startDa, arrivalDa];
+};
 
+const init = () => {
+  const starting = document.querySelector(".start").value.toLowerCase();
+  const ending = document.querySelector(".end").value.toLowerCase();
+  const dateInput = document.querySelector(".date").value;
+  let find = false;
+  resultView.innerHTML = "";
+  errorMsg.innerHTML = "";
+  let r = "";
 
-<!---find the route using forEach method -->
-// route.forEach((routes, index) => {
-//   const from = routes.indexOf(starting);
-//   const to = routes.indexOf(ending);
-//   const s = routes.slice(from, to + 1);
-//   let days = 0;
-//   let counts;
-//   // s[from] === starting && s[to] === ending ? console.log(s) : "route not found";
-//   if (s[from] === starting && s[to] === ending) {
-//     console.log(s);
-//     // console.log(countdays(s));
-//     counts = countdays(s);
-//     for (let x of counts) {
-//       days += x;
-//     }
-//     console.log(days);
+  if (dateInput === "") {
+    errorMsg.innerHTML = "Please Enter the Date...";
+    resultView.innerHTML = "";
+    return;
+  }
 
-//     return;
-//   }
-//   // console.log(from, to);
-//   // console.log(s);
-//   // console.log(list);
-// });
+  for (let i = 0; i < route.length; i++) {
+    const from = route[i].indexOf(starting);
+    const to = route[i].indexOf(ending);
+    const s = route[i].slice(from, to + 1);
 
-// // -----calculate holidays(saturday,sunday)-----
-// const holiday = (dateInput, days) => {
-//   let da = new Date(dateInput);
-//   let rough = da.getDate();
-//   for (let i = 0; i < days; i++) {
-//     da.setDate(rough);
-//     // rough = da.getDate() + 1;
-//     console.log(da);
-//     rough = da.getDate() + 1;
-//     console.log("days:", da.getDay());
-//     if (da.getDay() === 6 || da.getDay() === 0) {
-//       count++;
-//     }
-//     console.log("count:", count);
-//   }
-//   return count;
-// };
+    let days = 0;
+    let counts;
+    if (starting === ending) {
+      errorMsg.innerHTML = "Route not found";
+      break;
+    }
+    if (s[0] === starting && s[s.length - 1] === ending) {
+      displayView.style.border = "1px solid #000";
+      s.forEach((item) => (r += `${item}->`));
+      const pathWay = r.slice(0, r.length - 2);
+      counts = countdays(s);
+      for (let x of counts) {
+        days += x;
+      }
 
-// // ------arrival date------
-// const arrivalDay = (dateInput, days) => {
-//   const da = new Date(dateInput);
-//   const startDa = `${da.getDate()} ${months[da.getMonth()]} Start`;
-//   console.log(startDa);
-//   da.setDate(da.getDate() + days);
-//   const arrivalDa = `Arrive on ${da.getDate()} ${months[da.getMonth()]}`;
-//   console.log(arrivalDa);
-//   return [startDa, arrivalDa];
-// };
+      const [startDate, arrivalDate] = holiday(dateInput, days);
+      markUp = `<p class="route para">Route: <br> ${pathWay}</p>
+      <p class="no_days para">Number of days:${days}</p>
+      <p class="arrival_date para">${startDate} -> ${arrivalDate}</p>`;
+      resultView.insertAdjacentHTML("afterbegin", markUp);
+      find = true;
+      break;
+    }
+  }
+  if (!find) {
+    errorMsg.innerHTML = "Route not found";
+  }
+};
+
+resetBtn.addEventListener("click", () => {
+  errorMsg.innerHTML = "";
+  resultView.innerHTML = "";
+});

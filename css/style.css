@@ -101,6 +101,7 @@ input:focus {
   padding: 1rem;
   width: 100%;
   text-align: center;
+  height: 20rem;
 }
 .error-msg {
   position: relative;

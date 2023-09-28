@@ -1,3 +1,9 @@
+// In this project, I use the dijkstra algorithm ==>>  O((V + E) log V)
+// Dijkstra algorithm : Dijkstra's Algorithm is a Graph algorithm that finds the shortest path from a source vertex to all other vertices in the Graph (single source shortest path).
+// there are two type of time complexity:
+// 1) The time complexity of Dijkstra's Algorithm is O(V2) with the help of the adjacency matrix representation of the graph.
+// 2) This time complexity can be reduced to O((V + E) log V) with the help of an adjacency list representation of the graph,
+
 const INF = 2147483647;
 const places = [
   "tirunelveli",
@@ -59,10 +65,10 @@ for (let i in pairing) {
   for (let j in pairing[i]) {
     let split = j.split("-");
     split.push(pairing[i][j]);
-    arr.push([split]);
+    arr.push(split);
   }
 }
-
+// console.log(arr);
 const power = (num) => {
   return num > 0
     ? ["th", "st", "nd", "rd"][
@@ -73,7 +79,9 @@ const power = (num) => {
 
 // -------start date -> arrival date--------
 const holiday = (dateInput, days) => {
+  console.log(dateInput);
   let date = new Date(dateInput);
+  console.log(date);
   let startDa = `${date.getDate()}<sup>${power(date.getDate())}</sup> ${
     months[date.getMonth()]
   } Start`;
@@ -126,6 +134,8 @@ const init = () => {
       return;
     }
 
+    // why use constructor in class?
+    // the constructor is a special method of a class for creating and initializing an object instance of that class
     class Graph {
       constructor(V) {
         this.V = V;
@@ -197,10 +207,14 @@ const init = () => {
     let V = places.length;
     let g = new Graph(V);
 
-    for (let i = 0; i < arr.length; i++) {
-      for (let j of arr[i]) {
-        g.countDays(places.indexOf(j[0]), places.indexOf(j[1]), j[2]);
-      }
+    // for (let i = 0; i < arr.length; i++) {
+    //   for (let j of arr[i]) {
+    //     g.countDays(places.indexOf(j[0]), places.indexOf(j[1]), j[2]);
+    //   }
+    // }
+
+    for (let j of arr) {
+      g.countDays(places.indexOf(j[0]), places.indexOf(j[1]), j[2]);
     }
 
     // Function call
@@ -210,6 +224,7 @@ const init = () => {
     for (let i = 0; i < collection.length; i++) {
       set[collection[i][1]] = collection[i][0];
     }
+    // console.log(collection);
 
     const shortestPathWay = g.extractShortestPath(set, starting, ending);
 
@@ -232,3 +247,26 @@ resetBtn.addEventListener("click", () => {
   errorMsg.innerHTML = "";
   resultView.innerHTML = "";
 });
+
+// const obj = {
+//   name: "dinesh",
+//   number: 2,
+//   "{": "}",
+// };
+// console.log(obj["{"]);
+// for (let value in obj) {
+//   console.log(obj[value]);
+// }
+// for (let [key, values] of Object.entries(obj)) {
+//   console.log(values);
+// }
+
+// const sample = (number) => {
+//   try {
+//     if (number === 32) throw new Error("number is 32");
+//   } catch (error) {
+//     // console.error(error);
+//     console.log(error.message);
+//   }
+// };
+// sample(32);
